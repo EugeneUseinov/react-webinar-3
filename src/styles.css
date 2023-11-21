@@ -32,6 +32,11 @@ body {
 
 .List-item {
   border-bottom: 1px dashed #ccc;
+  cursor: pointer;
+}
+
+.List-item:hover {
+  background-color: #c0d6f5;
 }
 
 .Item {

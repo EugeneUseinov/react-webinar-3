@@ -1,3 +1,6 @@
+import {DEFAULT_COUNT} from "./constants";
+import {counter} from "./utils";
+
 /**
  * Хранилище состояния приложения
  */
@@ -42,9 +45,10 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    const code = counter();
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code, title: 'Новая запись', count: DEFAULT_COUNT}]
     })
   };
 
@@ -68,7 +72,11 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
+          const count = item.selected ? item.count : item.count +1
+          item.count = count
           item.selected = !item.selected;
+        } else {
+          item.selected = false
         }
         return item;
       })
