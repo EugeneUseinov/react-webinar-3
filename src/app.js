@@ -36,7 +36,10 @@ function App({store}) {
                 <div className='Item-code'>{item.code}</div>
                 <div className='Item-title'>{renderTitle(item)}</div>
                 <div className='Item-actions'>
-                  <button onClick={() => store.deleteItem(item.code)}>
+                  <button onClick={(e) => {
+                    e.stopPropagation();
+                    store.deleteItem(item.code)
+                  }}>
                     Удалить
                   </button>
                 </div>
