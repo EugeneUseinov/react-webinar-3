@@ -1,42 +1,21 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import {plural} from "../../utils";
+import {cn as bem} from '@bem-react/classname';
+import {numFormatter} from '/utils';
 import './style.css';
 
 function Item(props) {
-
-  // Счётчик выделений
-  const [count, setCount] = useState(0);
-
-  const callbacks = {
-    onClick: () => {
-      props.onSelect(props.item.code);
-      if (!props.item.selected) {
-        setCount(count + 1);
-      }
-    },
-    onDelete: (e) => {
-      e.stopPropagation();
-      props.onDelete(props.item.code);
-
-    }
-  }
-
+  const cn = bem('Item');
+  const {code, title, price} = props.item
   return (
-    <div className={'Item' + (props.item.selected ? ' Item_selected' : '')}
-         onClick={callbacks.onClick}>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>
-        {props.item.title} {count ? ` | Выделяли ${count} ${plural(count, {
-        one: 'раз',
-        few: 'раза',
-        many: 'раз'
-      })}` : ''}
-      </div>
-      <div className='Item-actions'>
-        <button onClick={callbacks.onDelete}>
-          Удалить
-        </button>
+    <div className={cn()}>
+      <div className={cn('code')}>{code}</div>
+      <div className={cn('title')}>{title}</div>
+      <div className={cn('box')}>
+      <div className={cn('price')}>{`${numFormatter(price)} ₽`}</div>
+      <button className={cn('add')} onClick={() => props.onAddItem(props.item)}>
+        {props.addText}
+      </button>
       </div>
     </div>
   );
@@ -46,18 +25,16 @@ Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
-    selected: PropTypes.bool,
+    price: PropTypes.number,
     count: PropTypes.number
   }).isRequired,
-  onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  onAddItem: PropTypes.func,
 };
 
 Item.defaultProps = {
-  onDelete: () => {
-  },
-  onSelect: () => {
-  },
+  addText: 'Добавить',
+  onAddItem: () => {},
+  numFormatter: () => {},
 }
 
 export default React.memo(Item);
