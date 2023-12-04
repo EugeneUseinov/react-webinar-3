@@ -20,8 +20,8 @@ function App({store}) {
   const basket = store.getState().basket;
   const callbacks = {
     onAddItem: useCallback(
-      (item) => {
-        store.addItem(item);
+      (code) => {
+        store.addItem(code);
       }, [store]),
     onDeleteItem: useCallback(
       (code, price, count) => {

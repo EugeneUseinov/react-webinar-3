@@ -13,7 +13,7 @@ function Item(props) {
       <div className={cn('title')}>{title}</div>
       <div className={cn('box')}>
       <div className={cn('price')}>{`${numFormatter(price)} ₽`}</div>
-      <button className={cn('add')} onClick={() => props.onAddItem(props.item)}>
+      <button className={cn('add')} onClick={() => props.onAddItem(code)}>
         {props.addText}
       </button>
       </div>

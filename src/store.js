@@ -38,40 +38,41 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-/**
-   * Добавление новой записи либо увеличение счётчика в текущей
+  /**
+   * Добавление новой записи либо увеличение счётчика в текущей.
+   * Сортировка корзины по возрастанию кода товара.
    */
-addItem(item) {
-  if (!this.state.basket?.length) {
-    this.setState({
-      ...this.state,
-      basket: [{ ...item, count: 1 }],
-      totalPrice: item.price,
+  addItem(code) {
+    let isFound = false;
+    let totalPrice = 0;
+    const updatedBasket = this.getState().basket.map((item) => {
+      let currentItem = item;
+      if (item.code === code) {
+        isFound = true;
+        currentItem = { ...item, count: item.count + 1 };
+      }
+      totalPrice += currentItem.price * currentItem.count;
+      return currentItem;
     });
-  } else {
-    const basket = [...this.state.basket];
-    const index = basket.findIndex((el) => el.code == item.code);
-    if (index + 1) {
-      basket[index] = { ...basket[index], count: basket[index].count + 1 };
-    } else {
-      basket.push({ ...item, count: 1 });
+    if (!isFound) {
+      const item = this.getState().list.find((item) => item.code === code);
+      updatedBasket.push({ ...item, count: 1 });
+      totalPrice += item.price;
     }
     //Сортировка позиций в корзине по возрастанию индекса
-    basket.sort((a, b) => a["code"] > b["code"] ? 1 : -1);
-    const totalPrice = basket.reduce((acc, item) => {
-      return acc + item.price * item.count;
-    }, 0);
+    updatedBasket.sort((a, b) => (a["code"] > b["code"] ? 1 : -1));
     this.setState({
       ...this.state,
-      basket: basket,
-      totalPrice: totalPrice
+      basket: updatedBasket,
+      totalPrice: totalPrice,
     });
   }
-}
 
   /**
    * Удаление записи по коду
    * @param code
+   * @param price
+   * @param count
    */
   deleteItem(code, price, count) {
     this.setState({
@@ -81,12 +82,19 @@ addItem(item) {
     });
   }
 
+  /**
+   * Открытие модального окна по флагу
+   */
   openModal() {
     this.setState({
       ...this.state,
       modalActive: true,
     });
   }
+
+  /**
+   * Закрытие модального окна по флагу
+   */
   closeModal() {
     this.setState({
       ...this.state,
