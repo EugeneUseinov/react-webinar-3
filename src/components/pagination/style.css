@@ -1,0 +1,35 @@
+.Pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 22px;
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: #000000;
+}
+
+.Pagination-item {
+    min-height: 18px;
+    min-width: 12px;
+    padding: 2px 4px 0 4px;
+    text-align: center;
+}
+
+.Pagination-item:hover {
+  cursor: pointer;
+  background: #e1e1e1;
+}
+
+.Pagination-item.active {
+  background: #0087e9;
+  color: #ffffff;
+}
+
+.Pagination-item-dots {
+  height: 20px;
+  width: 20px;
+  color: #cccccc;
+}

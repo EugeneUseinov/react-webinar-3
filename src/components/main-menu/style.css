@@ -1,0 +1,16 @@
+/* Контрол с общими действиями */
+.Main-menu {
+
+}
+
+.Main-menu-home {
+  display: flex;
+  padding: 18px 0 0 20px;
+  font-size: 18px;
+  color: #0087e9;
+  text-decoration: underline;
+}
+
+.Main-menu-home:hover {
+  cursor: pointer;
+}
