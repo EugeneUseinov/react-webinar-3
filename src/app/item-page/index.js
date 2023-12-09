@@ -50,6 +50,9 @@ function ItemPage() {
       () => store.actions.language.onLangChange(event.target.value),
       [store]
     ),
+    homeLink: useCallback(async () => {
+      await store.actions.catalog.startUrl()
+    }, [])
   };
 
   return (
@@ -70,6 +73,7 @@ function ItemPage() {
         manyProduct={TRANSLATE_LIST?.[select.lang]?.manyProduct}
         emptyBasket={TRANSLATE_LIST?.[select.lang]?.emptyBasket}
         goTo={TRANSLATE_LIST?.[select.lang]?.goTo}
+        homeLink={callbacks.homeLink}
       />
       {isLoading ? (
         <Loader />

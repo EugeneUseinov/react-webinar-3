@@ -23,15 +23,18 @@ const Pagination = (props) => {
           return <div key = {Math.floor(Math.random() * 100000)} className={cn("item-dots")}>{DOTS}</div>;
         }
         return (
-          <div key = {pageNumber}
+          <a key = {pageNumber}
             className={cn(`item ${
-              currentPage == pageNumber ? "active" : ""
+              currentPage === pageNumber ? "active" : ""
             }`)}
             selected={pageNumber === currentPage}
-            onClick={() => onLoad(pageNumber)}
+            href={`?page=${pageNumber}`}
+            onClick={(e) => {
+              e.preventDefault()
+              onLoad(pageNumber)}}
           >
             {pageNumber}
-          </div>
+          </a>
         );
       })}
     </div>

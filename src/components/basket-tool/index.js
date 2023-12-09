@@ -8,7 +8,7 @@ function BasketTool(props) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
-      <span className={cn('label')}>{props.inBasket}</span>
+      <span className={cn('label')}>{props.inBasket}:</span>
       <span className={cn('total')}>
         {props.amount
           ? `${props.amount} ${plural(props.amount, {
@@ -39,7 +39,6 @@ BasketTool.propTypes = {
 BasketTool.defaultProps = {
   onOpen: () => {},
   sum: 0,
-  amount: 0
 }
 
 export default memo(BasketTool);

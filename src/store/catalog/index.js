@@ -11,15 +11,27 @@ class Catalog extends StoreModule {
   initState() {
     return {
       list: [],
-      current: 0,
-      currentArticle: {},
+      current: 1,
       itemsOnPage: 10,
     }
   }
 
-  async load(id, itemsOnPage) {
-    itemsOnPage = this.getState().itemsOnPage
+  async startUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let catalogPage = Number(urlParams.get('page')) || 1;
+    await this.load(catalogPage, true);
+  }
+
+  async load(id, rewriteURL = false) {
+    const itemsOnPage = this.getState().itemsOnPage
     const currentPage = id || 1;
+    let urlSearch = new URLSearchParams({page: currentPage}).toString();
+    const url = window.location.pathname + '?' + urlSearch + window.location.hash;
+    if (rewriteURL) {
+      window.history.replaceState({}, '', url);
+    } else {
+      window.history.pushState({}, '', url);
+    }
     const response = await fetch(
       `/api/v1/articles?limit=${itemsOnPage}&skip=${
         currentPage * itemsOnPage - itemsOnPage

@@ -43,7 +43,7 @@ function Basket() {
                          onOpen={callbacks.openModalItemCard}
                          countField={TRANSLATE_LIST?.[select.lang]?.pc}
                          delete={TRANSLATE_LIST?.[select.lang]?.delete}
-                         path={'item-page/'}
+                         path={`item-page/${item._id}`}
       />
     }, [callbacks.removeFromBasket]),
   };

@@ -4,11 +4,11 @@ import { cn as bem } from "@bem-react/classname";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-function MainMenu({ home }) {
+function MainMenu({ home, homeLink }) {
   const cn = bem("Main-menu");
   return (
     <div className={cn()}>
-      <Link to="/" className={cn("home")}>
+      <Link to="/" onClick={homeLink()} className={cn("home")}>
       {home}
       </Link>
     </div>
@@ -17,6 +17,11 @@ function MainMenu({ home }) {
 
 MainMenu.propTypes = {
   home: PropTypes.string,
+  homeLink: PropTypes.func,
 };
+
+MainMenu.defaultProps = {
+  homeLink: () => {},
+}
 
 export default memo(MainMenu);

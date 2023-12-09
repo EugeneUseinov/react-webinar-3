@@ -20,6 +20,7 @@ Head.propTypes = {
 
 Head.defaultProps = {
   onLangChange: () => {},
+  title: 'Заголовок'
 };
 
 export default memo(Head);

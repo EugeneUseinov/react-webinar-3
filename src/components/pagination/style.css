@@ -16,6 +16,8 @@
     min-width: 12px;
     padding: 2px 4px 0 4px;
     text-align: center;
+    text-decoration: none;
+    color: inherit;
 }
 
 .Pagination-item:hover {

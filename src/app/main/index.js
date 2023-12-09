@@ -17,8 +17,12 @@ function Main() {
   useEffect(() => {
     setIsLoading(true);
     async function loading() {
-      await store.actions.catalog.load();
+      await store.actions.catalog.startUrl();
       setIsLoading(false);
+      window.addEventListener('popstate', loading);
+      return () => {
+        window.removeEventListener('popstate', loading)
+      }
     }
     loading();
   }, []);
@@ -46,12 +50,15 @@ function Main() {
       (event) => store.actions.language.onLangChange(event.target.value),
       [store]
     ),
+    homeLink: useCallback(async () => {
+      await store.actions.catalog.startUrl()
+    }, [])
   }
 
   const renders = {
     item: useCallback((item) => {
       return <Item item={item} onAdd={callbacks.addToBasket} add={TRANSLATE_LIST?.[select.lang]?.add}
-                   path={"item-page/"}/>
+                   path={`item-page/${item._id}`}/>
     }, [callbacks.addToBasket, select.lang]),
   };
 
@@ -73,6 +80,7 @@ function Main() {
         manyProduct={TRANSLATE_LIST?.[select.lang]?.manyProduct}
         emptyBasket={TRANSLATE_LIST?.[select.lang]?.emptyBasket}
         goTo={TRANSLATE_LIST?.[select.lang]?.goTo}
+        homeLink={callbacks.homeLink}
       />
       {isLoading ? (
         <Loader />

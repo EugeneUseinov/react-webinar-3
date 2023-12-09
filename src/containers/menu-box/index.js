@@ -9,7 +9,7 @@ function MenuBox(props) {
   const cn = bem("Menu-box");
   return (
     <div className={cn()}>
-      <MainMenu home={props.home} />
+      <MainMenu home={props.home} homeLink={props.homeLink}/>
       <BasketTool
         sum={props.sum}
         amount={props.amount}
@@ -35,10 +35,12 @@ MenuBox.propTypes = {
   manyProduct: PropTypes.string,
   emptyBasket: PropTypes.string,
   goTo: PropTypes.string,
+  homeLink: PropTypes.func,
 };
 
 MenuBox.defaultProps = {
   onOpen: () => {},
+  homeLink: () => {},
   sum: 0,
   amount: 0,
 };
