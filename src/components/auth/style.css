@@ -1,0 +1,38 @@
+.Auth{
+  display: flex;
+  font-size: 16px;
+  margin-top: 38px;
+  margin-left: 20px;
+  font-weight: 400;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Auth-header{
+  font-size: 24px;
+  font-weight: 700;
+}
+.Auth-error{
+  margin-bottom: 20px;
+  color: #FF0000;
+}
+
+.Auth-login{
+  margin-top: 17px;
+}
+
+.Auth-password{
+
+}
+
+.Auth-input{
+  font-size: 16px;
+  margin-top: 1px;
+  margin-bottom: 20px;
+  width: 200px;
+  height: 26px;
+}
+
+.Auth-input::placeholder{
+  font-size: 16px;
+}

@@ -28,7 +28,7 @@ function Pagination(props) {
   if (right < length) items.push(length);
 
   const onClickHandler = (number) => (e) => {
-    if (props.onChange) {
+    if (number && props.onChange) {
       e.preventDefault();
       props.onChange(number);
     }

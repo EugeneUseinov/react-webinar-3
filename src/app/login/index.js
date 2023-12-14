@@ -2,38 +2,38 @@ import {memo, useCallback} from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
-import useSelector from '../../hooks/use-selector';
 import Navigation from "../../containers/navigation";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import CatalogFilter from "../../containers/catalog-filter";
-import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import Auth from '../../components/auth';
 import AuthBar from '../../components/auth-bar';
+import useSelector from '../../hooks/use-selector';
+import { useNavigate } from 'react-router-dom';
 
-/**
- * Главная страница - первичная загрузка каталога
- */
-function Main() {
-
+function Login() {
   const store = useStore();
-
+  const navigate = useNavigate();
   useInit(() => {
-    store.actions.catalog.initParams();
+    if (select.user) {
+      navigate('/profile', { replace: true })
+    }
     store.actions.auth.initUserFromStorage();
-    store.actions.category.getCategory();
+    store.actions.auth.resetError();
   }, [], true);
-
   const select = useSelector(state => ({
-    waiting: state.article.waiting,
+    errors: state.auth.errors,
     user: state.auth.userName,
   }));
 
   const callbacks = {
     // Выход
     signOut: useCallback(() => store.actions.auth.signOut(), [store]),
+    // Авторизация
+    signIn: useCallback((authInfo, callbackBySuccess) => store.actions.auth.signIn(authInfo, callbackBySuccess), [store]),
   }
 
+  // Функция для локализации текстов
   const {t} = useTranslate();
 
   return (
@@ -42,11 +42,10 @@ function Main() {
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>
-      <Navigation/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <Navigation />
+      <Auth onLogIn={callbacks.signIn} t={t} errors={select.errors}/>
     </PageLayout>
   );
 }
 
-export default memo(Main);
+export default memo(Login);

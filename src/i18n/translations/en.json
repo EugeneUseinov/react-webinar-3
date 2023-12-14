@@ -14,5 +14,21 @@
   "basket.articles": {
     "one": "article",
     "other": "articles"
-  }
+  },
+  "article-card.country": "Manufacturer country",
+  "article-card.category": "Category",
+  "article-card.year": "Year of issue",
+  "article-card.price": "Price",
+  "auth.header": "Log in",
+  "auth.login": "Login",
+  "auth.login-placeholder": "Enter username",
+  "auth.password": "Password",
+  "auth.password-placeholder": "Enter password",
+  "auth.sign-in": "Sign in",
+  "profile-card.header": "Profile",
+  "profile-card.name": "Name",
+  "profile-card.phone": "Phone",
+  "profile-card.email": "email",
+  "auth-bar.sign-in": "Sign in",
+  "auth-bar.sign-out": "Sign out"
 }

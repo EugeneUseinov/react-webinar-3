@@ -33,3 +33,38 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+export function createCategoryList (items) {
+  return createCategoryArray(createDataTree(items))
+}
+//Формируем дерево родители => потомки
+function createDataTree(items) {
+  const categoryTree = [];
+  const treeTable = Object.create(null);
+  items.forEach(
+    (category) => (treeTable[category._id] = { ...category, child: [] })
+  );
+  items.forEach((category) => {
+    if (category.parent?._id)
+      treeTable[category.parent._id].child.push(treeTable[category._id]);
+    else categoryTree.push(treeTable[category._id]);
+  });
+  return categoryTree;
+}
+//Формируем массив категорий с учётом вложенности
+function createCategoryArray(item, parentId, id = 0) {
+  return item.reduce((acc, el) => {
+    const dash = "- ";
+    const title = `${
+      !parentId
+        ? el.title
+        : dash.repeat(id) + el.title
+    }`;
+    const value = el._id;
+    acc.push({ value, title });
+    if(el.child.length) {
+      acc = [...acc, ...createCategoryArray(el.child, title, id + 1)];
+    }
+    return acc;
+  }, []);
+}

@@ -16,5 +16,21 @@
     "few": "товара",
     "many": "товаров",
     "other": "товара"
-  }
+  },
+  "article-card.country": "Страна производитель",
+  "article-card.category": "Категория",
+  "article-card.year": "Год выпуска",
+  "article-card.price": "Цена",
+  "auth.header": "Вход",
+  "auth.login": "Логин",
+  "auth.login-placeholder": "Введите имя пользователя",
+  "auth.password": "Пароль",
+  "auth.password-placeholder": "Введите пароль",
+  "auth.sign-in": "Войти",
+  "profile-card.header": "Профиль",
+  "profile-card.name": "Имя",
+  "profile-card.phone": "Телефон",
+  "profile-card.email": "email",
+  "auth-bar.sign-in": "Вход",
+  "auth-bar.sign-out": "Выход"
 }
