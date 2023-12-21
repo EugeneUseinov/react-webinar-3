@@ -40,7 +40,7 @@ function CatalogFilter() {
       {value: 'title.ru', title: 'По именованию'},
       {value: '-price', title: 'Сначала дорогие'},
       {value: 'edition', title: 'Древние'},
-    ]), []),
+    ]), [t]),
     // Категории для фильтра
     categories: useMemo(() => ([
       {value: '', title: 'Все'},

@@ -1,0 +1,9 @@
+.CommentList {
+    box-sizing: border-box;
+}
+
+.CommentList-comment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;    
+}

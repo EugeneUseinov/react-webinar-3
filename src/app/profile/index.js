@@ -18,14 +18,14 @@ function Profile() {
 
   useInit(() => {
     store.actions.profile.load();
-  }, []);
+  }, [t, lang]);
 
   const select = useSelector(state => ({
     profile: state.profile.data,
     waiting: state.profile.waiting,
   }));
 
-  const {t} = useTranslate();
+  const {t, lang} = useTranslate();
 
   return (
     <PageLayout>

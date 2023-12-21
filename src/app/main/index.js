@@ -19,9 +19,9 @@ function Main() {
       store.actions.catalog.initParams(),
       store.actions.categories.load()
     ]);
-  }, [], true);
+  }, [t, lang], true);
 
-  const {t} = useTranslate();
+  const {t, lang} = useTranslate();
 
   return (
     <PageLayout>
