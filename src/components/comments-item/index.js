@@ -36,7 +36,7 @@ function CommentsItem(props) {
   return (
     <div className={cn()}>
       <div className={cn("title")}>
-        <div className={cn("author")}>{props.item.author.profile.name}</div>
+        <div className={props.userName === props.item.author.profile.name ? cn("author") : cn("user")}>{props.item.author.profile.name}</div>
         <div className={cn("dateCreate")}>
           {dateParser(props.item.dateCreate)}
         </div>
@@ -60,6 +60,7 @@ function CommentsItem(props) {
               item={childComment}
               exists={props.exists}
               userId={props.userId}
+              userName={props.userName}
               commentId={props.commentId}
               onChangeId={props.onChangeId}
               onChange={props.onChange}
@@ -99,6 +100,7 @@ CommentsItem.propTypes = {
   onPost: PropTypes.func,
   onChangeId: PropTypes.func,
   onChange: PropTypes.func,
+  userName: PropTypes.string,
 };
 
 CommentsItem.defaultProps = {

@@ -30,15 +30,14 @@ function ArticleComments() {
   const selectStore = useSelector(state => ({
     exists: state.session.exists,
     userId: state.session.user._id,
+    userName: state.session.user.profile?.name,
   }));
-
   const selectRedux = useSelectorRedux(state => ({
     comments: state.comments.data,
     waiting: state.comments.waiting,
   }), shallowequal);
   const [commentId, setCommentId] = useState('');
   const [text, setText] = useState('');
-  //let hiddenElement = null
   const callbacks = {
     getCommentsList: useCallback(() => {
       if (selectRedux.comments.items) {
@@ -72,6 +71,7 @@ function ArticleComments() {
             item={item}
             exists={selectStore.exists}
             userId={selectStore.userId}
+            userName ={selectStore.userName}
             commentId={commentId}
             onLogin={callbacks.onLogin}
             onPost={callbacks.onPost}

@@ -1,4 +1,4 @@
-import { memo, useLayoutEffect, useState } from 'react';
+import { memo, useLayoutEffect, useState, useRef } from 'react';
 import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import PropTypes from 'prop-types';
@@ -7,10 +7,14 @@ import './style.css';
 function CommentsCreate({padding, ...props}) {
   const [value, setValue] = useState(props.value);
   const [isNestedLevel] = useState(props.commentId);
-
+  const answerRef = useRef(null)
   const {t} = useTranslate();
-
-  useLayoutEffect(() => setValue(props.value), [props.value]);
+  useLayoutEffect(() => {
+    setValue(props.value)
+    if (answerRef.current !== null) {
+    answerRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'})
+    }
+  }, [props.value, answerRef]);
   const onHandleChange = (event) => {
     setValue(event.target.value);
     props.onChange(event.target.value);
@@ -29,7 +33,7 @@ function CommentsCreate({padding, ...props}) {
 
   const cn = bem('CommentsCreate');
   return (
-    <div id={"comment"} className={cn({padding})}>
+    <div ref={isNestedLevel ? answerRef : null} className={cn({padding})}>
       <div className={cn("title")}>
         {isNestedLevel
           ? t("comments-create.answerTitle")

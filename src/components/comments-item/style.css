@@ -15,10 +15,17 @@
   align-items: center;
 }
 
+.CommentsItem-user{
+  font-weight: 700;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
 .CommentsItem-author {
   font-weight: 700;
   font-size: 12px;
   margin-right: 10px;
+  color: #666666;
 }
 
 .CommentsItem-dateCreate {
